@@ -4,9 +4,41 @@
 <title>Russian Troll Detector</title>
 </head>
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 <h1>Welcome to Russian Troll Detector</h1>
+     <form>
+          Username:<br>
+          <input type="text" id="username" placeholder=""><br>
+          <!--Need to put type to button in order to prevent from refreshing-->
+          <button type="button" id="submitUsername">Submit</button>
+    </form>
+
+<script>
+    function submitUsername() {
+        var username = $('#username').val();
+        console.log(username)
+        $.ajax({
+            url: 'get_tweets',
+            data: {
+                'username':username
+            },
+
+            success: function(res){
+                console.log(res)
+            }
+
+        });
+    }
 
 
+    $('#submitUsername').click(function(event) {
+        submitUsername();
+        console.log('hi')
+    });
+
+</script>
 </body>
 </html>
+
