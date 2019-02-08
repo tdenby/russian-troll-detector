@@ -13,6 +13,7 @@
           <input type="text" id="username" placeholder=""><br>
           <!--Need to put type to button in order to prevent from refreshing-->
           <button type="button" id="submitUsername">Submit</button>
+          <p id="result">Result?</p>
     </form>
 
 <script>
@@ -20,13 +21,15 @@
         var username = $('#username').val();
         console.log(username)
         $.ajax({
-            url: 'get_tweets',
+            url: 'get_user_tweets',
             data: {
                 'username':username
             },
 
             success: function(res){
                 console.log(res)
+                $('#result').html(JSON.stringify(res))
+
             }
 
         });

@@ -14,12 +14,17 @@ def index(request):
 
     return HttpResponse(template.render(context, request))
 
-def get_tweets(request):
+def get_user_tweets(request):
     data = 'FAIL'
     if request.is_ajax():
         print('is ajax')
         username = request.GET.get('username', 'None')
-        print(username)
+        print('username is ' + username)
+
+        ## complete
+        from website.tasks import get_tweets
+        job = get_tweets(username)
+        data = job
     else:
         data = 'Not an ajax request'
 
