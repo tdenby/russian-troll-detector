@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from website.views import index, get_tweets
 urlpatterns = [
+    url(r'^$', index),
+    url( r'get_tweets', get_tweets ),
     url(r'^admin/', admin.site.urls),
 ]
+
