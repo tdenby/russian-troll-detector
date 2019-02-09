@@ -32,10 +32,12 @@ cd russian-troll-detector/
 ```
 
 Create a virtualenv. You may name it as you wish, here we use "rtenv (russian troll env)"
+
+*[ Note: Built with python 3.7. If you use a different version and find issues, please ping us! ]*
+
 ```
 virtualenv -p python3.7 rtenv
 ```
-*[ Note: Built with python 3.7. If you use a different version and find issues, please ping us! ]*
 
 Activate the virtualenv
 ```
