@@ -1,12 +1,11 @@
 # russian-troll-detector
 A system that returns the likelihood of a given Twitter account to be a Russian troll.
 
-## Publications
-https://arxiv.org/pdf/1901.11162.pdf
+## Related work
+[Still Out There: Modeling and Identifying Russian Troll Accounts on Twitter](https://arxiv.org/pdf/1901.11162.pdf)
 
 There  is  evidence  that  Russia’s  Internet  Research  Agency attempted  to  interfere  with  the  2016  U.S.  election  by  running fake accounts on Twitter—often referred to as “Russian trolls”. In this work, we: 1) develop machine learning models
-that predict whether a Twitter account is a Russian troll within a set of 170K control accounts; and, 2) demonstrate that it is
-possible to use this model to find active accounts on Twitter still likely acting on behalf of the Russian state.
+that predict whether a Twitter account is a Russian troll within a set of 170K control accounts; and, 2) demonstrate that it is possible to use this model to find active accounts on Twitter still likely acting on behalf of the Russian state.
 
 ## How to build
 **1.Clone the repository.**
