@@ -9,12 +9,27 @@ that predict whether a Twitter account is a Russian troll within a set of 170K c
 possible to use this model to find active accounts on Twitter still likely acting on behalf of the Russian state.
 
 ## How to build
-**1.Install [virtualenv](https://virtualenv.pypa.io/en/latest/)**
+**1.Clone the repository.**
+```
+git clone https://github.com/trusttri/russian-troll-detector.git
+```
+
+Or if you clone from your forked one,
+```
+git clone https://github.com/[YOUR USERNAME]/russian-troll-detector.git
+```
+
+**2.Install [virtualenv](https://virtualenv.pypa.io/en/latest/)**
 ```
 pip3 install virtualenv
 ```
 
-**2.Create & activate your virtualenv and install the needed python packages.**
+**3.Create & activate your virtualenv and install the needed python packages.**
+
+Go to russian-troll-detector directory
+```
+cd russian-troll-detector
+```
 
 Create a virtualenv. You may name it as you wish, here we use "rtenv (russian troll env)"
 ```
@@ -36,7 +51,7 @@ Install the needed python packages. Everything including Django is included in [
 (rtenv) ~$ pip install -r requirements.txt
 ```
 
-**3.Run the server**
+**4.Run the server**
 ```
 (rtenv) ~$ python manage.py runsever
 ```
