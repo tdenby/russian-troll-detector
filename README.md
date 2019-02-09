@@ -38,6 +38,6 @@ Install the needed python packages. Everything including Django is included in "
 
 **3.Run the server**
 ```
-python manage.py runsever
+(rtenv) ~$ python manage.py runsever
 ```
 Visit [http://localhost:8000/](http://localhost:8000/)
