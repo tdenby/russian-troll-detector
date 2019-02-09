@@ -14,7 +14,7 @@ possible to use this model to find active accounts on Twitter still likely actin
 pip3 install virtualenv
 ```
 
-**2.Create and activate your virtualenv and install the python packages specified in requirements.txt**
+**2.Create & activate your virtualenv and install the needed python packages.**
 
 Create a virtualenv. You may name it as you wish, here we use "rtenv (russian troll env)"
 ```
@@ -31,7 +31,7 @@ Now you will see your terminal like the following:
 (rtenv) ~$
 ```
 
-Install the needed python packages. Everything including Django is included in "requirements.txt".
+Install the needed python packages. Everything including Django is included in [requirements.txt](russian-troll-detector/russian_troll_detector/requirements.txt) so just run the following.
 ```
 (rtenv) ~$ pip install -r requirements.txt
 ```
