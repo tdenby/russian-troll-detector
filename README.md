@@ -26,9 +26,9 @@ pip3 install virtualenv
 
 **3.Create & activate your virtualenv and install the needed python packages.**
 
-Go to russian-troll-detector directory
+Go to russian-troll-detector/ 
 ```
-cd russian-troll-detector
+cd russian-troll-detector/
 ```
 
 Create a virtualenv. You may name it as you wish, here we use "rtenv (russian troll env)"
