@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,16 +6,42 @@
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'website/css/bootstrap.min.css' %}">
+<script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'website/css/style.css' %}">
 
+<nav class="navbar navbar-expand-lg" id="mainNavbar">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">Russian Troll Detector</a>
+    </div>
+    <div class="navbar">
+        <ul class="nav navbar-nav navbar-left">
+          <li class="nav-item">
+            <a class="nav-link" href="">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">FAQ</a>
+          </li>
+        </ul>
+      </div>
+  </div>
+</nav>
 
-<h1>Welcome to Russian Troll Detector</h1>
-     <form>
-          Username:<br>
-          <input type="text" id="username" placeholder=""><br>
-          <!--Need to put type to button in order to prevent from refreshing-->
-          <button type="button" id="submitUsername">Submit</button>
-          <p id="result">Result?</p>
-    </form>
+<div class="container">
+  Enter the Twitter handle<br>
+   <form class="form-inline">
+        <input type="text" id="username" placeholder=""><br>
+        <!--Need to put type to button in order to prevent from refreshing-->
+        <button class="btn btn-info" type="button" id="submitUsername">Submit</button>
+   </form>
+
+  <p id="result">
+    Result?
+  </p>
+
+</div>
+
 
 <script>
     function submitUsername() {
