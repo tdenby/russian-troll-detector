@@ -22,11 +22,18 @@ def get_user_tweets(request):
         print('username is ' + username)
 
         ## complete
-        from website.tasks import get_tweets
+        from tasks.py import get_tweets
         job = get_tweets(username)
-        data = job
+        print(job)
+        data = job[1]
     else:
         data = 'Not an ajax request'
 
-    json_data = json.dumps(data)
+    data_dict = {}
+    for status in data:
+        data_dict["ID"] = status.Id
+        data_dict["ScreenName"] = status.ScreenName
+
+    print(data)
+    json_data = json.load()
     return HttpResponse(json_data, content_type='application/json')
