@@ -32,15 +32,14 @@
   <section id="enter-handle">
       Enter the Twitter handle<br>
 
-     <form class="form-inline">
-          <input type="text" id="username" placeholder=""><br>
+     <form class="form-inline" id = 'username-form'>
+          <input type="text" id="username" placeholder="@Username"><br>
           <!--Need to put type to button in order to prevent from refreshing-->
           <button class="btn btn-info" type="button" id="submitUsername">Submit</button>
      </form>
 
-    <p id="result">
+    <p id="result" style="margin-top: 10px; border: 1px #e7edf4; background-color: #e7edf4; border-radius: 5px; padding: 10px;">
       Result?
-    </p>
   </section>
 </div>
 
@@ -59,16 +58,28 @@
                 console.log(res)
                 $('#result').html(JSON.stringify(res))
 
+            },
+            error: function(res) {
+              console.log('ERROR: User not found.');
+              document.getElementById("result").innerHTML = "ERROR: User not found.";
             }
 
         });
     }
+    
+    $('#username').keypress(function (e) {                                       
+       if (e.which == 13) {
+            e.preventDefault();
+            $("#submitUsername").click();
+       }
+    });
 
 
     $('#submitUsername').click(function(event) {
         submitUsername();
         console.log('hi')
     });
+    
 
 </script>
 </body>
