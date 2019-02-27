@@ -3,11 +3,35 @@ import json
 import pandas as pd
 import datetime
 import math
+import pycld2 as cld2
 import re
 api = twitter.Api(consumer_key='39F2pHjvphFObfYRZuEcP13n8',
                   consumer_secret='JlQ4NahJEJPtbjwvQ7tBWXfdiD6H6VP45IeeUAusJG2lVdeZ45',
                   access_token_key='947384818559475714-3TcRZK1FlIQUsVGqJ1fBBvc2jsvdzw2',
                   access_token_secret='xOVgjtysy5RkLCpSdQRaaa5hLNAV98fcmi3nGlPjcSR4T')
+
+def is_valid(t):
+    return not (t[0] == '@' or
+                t[0] == '#' or
+                t.startswith('http') or
+                t.startswith('www'))
+
+
+def get_lang(tweet):
+    cleaned = ' '.join([x for x in tweet.split() if is_valid(x)])
+    try:
+        lang = cld2.detect(tweet)[2][0][1]
+    except:
+        return 'unk'
+    if lang == 'un' or lang == 'xxx':
+        return 'unk'
+    return lang
+
+
+def is_link(tweet):
+    # check for no link
+    return re.search("https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))", tweet.text)
+
 
 def get_tweets(username):
 
@@ -92,7 +116,7 @@ def calculate_features(user_id, author_tweets, follower, following):
     hashtag_word_count = 0.0
     hashtag_char_count = 0.0
     for tweet in author_tweets:
-        hashtags = extract_hashtag(tweet.text)
+        hashtags = re.findall(r"#(\w+)", tweet)
         hashtag_word_count += len(hashtags)
         hashtag_char_count += sum([len(ht) for ht in hashtags])
     feature_dict["avg_num_hashtags_words"] = hashtag_word_count / len(author_tweets)
@@ -101,7 +125,7 @@ def calculate_features(user_id, author_tweets, follower, following):
     # 7. ratio of retweets that contain link among all tweets
     retweet_link_count = 0.0
     for tweet in author_tweets:
-        if is_retweet(tweet) and is_link(tweet):
+        if tweet.retweeted_status and is_link(tweet):
             retweet_link_count += 1
     feature_dict["retweet_link_rate"] = retweet_link_count / len(author_tweets)
 
