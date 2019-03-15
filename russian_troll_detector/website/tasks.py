@@ -5,10 +5,10 @@ import datetime
 import math
 import pycld2 as cld2
 import re
-api = twitter.Api(consumer_key=,
-                  consumer_secret=,
-                  access_token_key=,
-                  access_token_secret=)
+api = twitter.Api(consumer_key='',
+                  consumer_secret='',
+                  access_token_key='',
+                  access_token_secret='')
 
 def is_valid(t):
     return not (t[0] == '@' or
@@ -20,7 +20,7 @@ def is_valid(t):
 def get_lang(tweet):
     cleaned = ' '.join([x for x in tweet.split() if is_valid(x)])
     try:
-        lang = cld2.detect(tweet)[2][0][1]
+        lang = cld2.detect(cleaned)[2][0][1]
     except:
         return 'unk'
     if lang == 'un' or lang == 'xxx':
@@ -61,14 +61,10 @@ def get_tweets(username):
     following = user["friends_count"]
 
     return user_id, author_tweets, follower, following
-    
-
-
 
 
 
 def calculate_features(user_id, author_tweets, follower, following):
-
     feature_dict = {}
 
     # the dictionary that keeps track of tweets made on each day
@@ -79,7 +75,10 @@ def calculate_features(user_id, author_tweets, follower, following):
         text += tweet.text + '\n'
 
         # construct the daily tweet dictionary
-        tweet_datetime = tweet.created_at
+        # Fri Mar 15 00:35:15 +0000 2019
+        tweet_datetime = datetime.datetime.strptime(tweet.created_at, '%a %b %d %H:%M:%S +0000 %Y')
+        # print(tweet_datetime)
+
         tweet_day = datetime.date(year=tweet_datetime.year, month=tweet_datetime.month, day=tweet_datetime.day)
         if tweet_day in author_daily_tweets:
             author_daily_tweets[tweet_day] += 1
@@ -116,7 +115,8 @@ def calculate_features(user_id, author_tweets, follower, following):
     hashtag_word_count = 0.0
     hashtag_char_count = 0.0
     for tweet in author_tweets:
-        hashtags = re.findall(r"#(\w+)", tweet)
+        # print(tweet)
+        hashtags = re.findall(r"#(\w+)", tweet.text)
         hashtag_word_count += len(hashtags)
         hashtag_char_count += sum([len(ht) for ht in hashtags])
     feature_dict["avg_num_hashtags_words"] = hashtag_word_count / len(author_tweets)
@@ -143,7 +143,7 @@ def calculate_features(user_id, author_tweets, follower, following):
     lang_count = {}
 
     """ The fixed list of languages we used for the model """
-    with open("../../features/2015-2017/fixed_lang.json") as file:
+    with open("model_info/fixed_lang.json") as file:
         fixed_languages = json.load(file)
 
     for tweet in author_tweets:
@@ -182,9 +182,6 @@ def calculate_features(user_id, author_tweets, follower, following):
     feature_dict["ratio_followers_following"] = float(follower) / float(following)
 
     feature_pd = pd.DataFrame([feature_dict], index=[user_id])
-    print(feature_pd)
+
     return feature_pd
 
-
-def make_predictions():
-    return None

@@ -64,7 +64,7 @@
         var username = $('#username').val();
         console.log(username)
         $.ajax({
-            url: 'get_user_tweets',
+            url: 'predict',
             data: {
                 'username':username
             },
@@ -75,8 +75,8 @@
 
             },
             error: function(res) {
-              console.log('ERROR: User not found.');
-              document.getElementById("result").innerHTML = "ERROR: User not found.";
+              console.log('ERROR');
+              document.getElementById("result").innerHTML = "ERROR";
             }
 
         });
