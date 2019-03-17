@@ -8,13 +8,18 @@ from django.http import HttpResponse
 from django.template import loader
 from .tasks import get_tweets, calculate_features
 
+from sklearn.externals import joblib
+from .extractors import ColumnExtractor, TextExtractor
+import sys
+sys.path.append('website')
+model_name = 'FAKE_MODEL.pkl'
+clf = joblib.load('website/' + model_name)
 
 def index(request):
     template = loader.get_template('website/index.html')
-    context = {
-                }
-
+    context = {}
     return HttpResponse(template.render(context, request))
+
 
 def predict(request):
     data = ''
@@ -29,16 +34,13 @@ def predict(request):
         X_test = calculate_features(user_id, author_tweets, follower, following)
 
         # 3.get prediction and probability of being RT
-        # is_rt = clf.predict(X_test)
-        # prob = clf.predict_proba(X_test)
+        is_rt = float(clf.predict(X_test)[0])
+        prob = float(clf.predict_proba(X_test).tolist()[0][1]*100)
 
-        # just temporary predictions, prob
-        is_rt = 1
-        prob = 0.8
-        data = {'is_rt':is_rt, 'prob':prob}
+        data = {'is_rt': is_rt, 'prob': prob}
 
     else:
-        data = {'Not an ajax request'}
+        data = {'response': 'Not an ajax request'}
 
     # for status in data:
         # print(status)
