@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import json
 from django.shortcuts import render
-
+from annoying.decorators import render_to
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader
@@ -10,6 +10,8 @@ from .tasks import get_tweets, calculate_features
 
 from sklearn.externals import joblib
 from .extractors import ColumnExtractor, TextExtractor
+
+""" CODE FOR LOADING MODEL """
 import sys
 sys.path.append('website')
 model_name = 'FAKE_MODEL.pkl'
@@ -51,3 +53,9 @@ def predict(request):
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type='application/json')
 
+
+@render_to('website/details.html')
+def visualize_account_details(request):
+    template = loader.get_template('website/details.html')
+    context = {}
+    return HttpResponse(template.render(context, request))

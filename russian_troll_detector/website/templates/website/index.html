@@ -53,6 +53,10 @@
 
       <div id="result">
           Result?
+
+      </div>
+      <br>
+      <div id="details">
       </div>
 
   </section>
@@ -65,14 +69,19 @@
         console.log(username)
         $.ajax({
             url: 'predict',
+            <!--type:'POST',-->
             data: {
                 'username':username
             },
 
             success: function(res){
                 console.log(res)
-                $('#result').html(JSON.stringify(res))
+                var is_rt = res["is_rt"]
+                var prob = res["prob"]
+                $('#result').html(is_rt +',' + prob)
 
+                <!--create button for viewing details about the submitted account-->
+                $('#details').html('<button class="btn btn-info" type="button" id="getDetails" onclick="location.href=\'/details\';" style="background-color:#007bff;">Get Account Details</button>')
             },
             error: function(res) {
               console.log('ERROR');

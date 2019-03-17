@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from website.views import index, predict
+from website.views import index, predict, visualize_account_details
 
 urlpatterns = [
     url(r'^$', index),
-    url( r'^predict', predict),
+    url(r'^predict', predict),
     url(r'^admin/', admin.site.urls),
+    url(r'^details/', visualize_account_details)
 ]
 
