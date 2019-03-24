@@ -7,7 +7,7 @@ from annoying.decorators import render_to
 from django.http import HttpResponse
 from django.template import loader
 from .tasks import get_tweets, calculate_features
-
+from django.views.decorators.csrf import csrf_exempt
 from sklearn.externals import joblib
 from .extractors import ColumnExtractor, TextExtractor
 
@@ -22,12 +22,12 @@ def index(request):
     context = {}
     return HttpResponse(template.render(context, request))
 
-
+@csrf_exempt
 def predict(request):
     data = ''
     if request.is_ajax():
         print('is ajax')
-        username = request.GET.get('username', 'None')
+        username = request.POST.get('username', 'None')
         print('username is ' + username)
 
         # 1.get tweets
