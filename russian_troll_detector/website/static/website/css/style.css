@@ -2,6 +2,11 @@
 
 #navbar {
     background-color: #dee6efb3;
+    font-size: 20px;
+}
+
+#navbar-name{
+    font-size: 25px;
 }
 
 #enter-handle {
