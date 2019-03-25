@@ -5,10 +5,19 @@ import datetime
 import math
 import pycld2 as cld2
 import re
-api = twitter.Api(consumer_key='',
-                  consumer_secret='',
-                  access_token_key='',
-                  access_token_secret='')
+
+# get the Twitter API keys from /etc
+creds = pd.read_csv('/etc/twitter-api-key.csv')
+consumer_key = creds['consumer_key'][0]
+consumer_secret = creds['consumer_secret'][0]
+access_token_key = creds['access_token'][0]
+access_token_secret = creds['access_token_secret'][0]
+
+api = twitter.Api(consumer_key=consumer_key,
+                  consumer_secret=consumer_secret,
+                  access_token_key=access_token_key,
+                  access_token_secret=access_token_secret)
+
 
 def is_valid(t):
     return not (t[0] == '@' or
