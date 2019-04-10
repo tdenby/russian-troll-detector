@@ -82,9 +82,8 @@
 
             success: function(res){
                 console.log(res)
-                var is_rt = res["is_rt"]
                 var prob = res["prob"]
-                $('#result').html(is_rt +',' + prob)
+                $('#result').html(prob)
 
                 <!--create button for viewing details about the submitted account-->
                 $('#details').html('<button class="btn btn-info" type="button" id="getDetails" onclick="location.href=\'/details\';" style="background-color:#007bff;">Get Account Details</button>')

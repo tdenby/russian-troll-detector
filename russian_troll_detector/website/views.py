@@ -39,10 +39,11 @@ def predict(request):
         is_rt = float(clf.predict(X_test)[0])
         prob = float(clf.predict_proba(X_test).tolist()[0][1]*100)
 
-        data = {'is_rt': is_rt, 'prob': prob}
+        data = {'prob': prob}
 
     else:
         data = {'response': 'Not an ajax request'}
+        
 
     # for status in data:
         # print(status)
